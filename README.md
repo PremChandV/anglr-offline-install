@@ -73,3 +73,40 @@ Installing Angular CLI offline requires you to first download the Angular CLI pa
 ### Summary
 
 With this setup, you should be able to create, build, and serve Angular projects on your offline computer using Angular CLI.
+
+--------------------------------------------------------------------------------------------------------------------------------
+
+Yes, you can use commands in your terminal to verify the path of both locally and globally installed Angular CLI.
+
+### 1. **Verify the Global Installation Path**
+
+To check the path of the globally installed Angular CLI, use the following command:
+
+```bash
+npm list -g @angular/cli --depth=0
+```
+
+This command lists all global packages at the top level (depth of 0) and will display the path where Angular CLI is installed globally.
+
+#### Alternatively:
+
+You can also find the global Angular CLI installation path by checking where the `ng` executable is located:
+
+```bash
+where ng
+```
+
+On Windows, this will return the full path(s) of the `ng` executable, showing where Angular CLI is globally installed.
+
+
+### 2. **Verify the Local Installation Path**
+
+To check if Angular CLI is installed locally within a project and see its path, navigate to the root directory of your Angular project and run:
+
+```bash
+npm list @angular/cli --depth=0
+```
+
+This will display the version and path of the Angular CLI installed in that specific project.
+
+If Angular CLI is not installed locally in the project, this command will show an error indicating that it’s not found.
