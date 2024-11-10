@@ -42,7 +42,7 @@ Installing Angular CLI offline requires you to first download the Angular CLI pa
      ```bash
      cd C:\angular-cli-offline\angular-cli
      ```
-   - Install Angular CLI globally from the local folder:
+   - Install Angular CLI globally from the local folder: (May be the global path is, C:\Users\<username>\AppData\Roaming\npm)
      ```bash
      npm install -g --offline @angular/cli
      ```
