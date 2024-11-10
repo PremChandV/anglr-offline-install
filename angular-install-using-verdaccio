@@ -1,0 +1,105 @@
+Installing Angular in a fully offline environment can be a bit tricky since Angular typically requires online resources. However, it’s doable with a bit of preparation. Here’s a step-by-step guide to set up Angular in an offline environment on Windows 10.
+
+### Step 1: Prepare the Online Environment
+Before you go offline, set up a computer with internet access to download the necessary packages.
+
+1. **Install Node.js**:  
+   Angular needs Node.js and npm (Node Package Manager) to work.
+   - Go to [Node.js website](https://nodejs.org/) and download the latest LTS version.
+   - Run the installer, follow the prompts, and install Node.js. This will automatically install npm.
+
+2. **Install Angular CLI Online**:
+   - Open a terminal (Command Prompt or PowerShell) and run:
+     ```bash
+     npm install -g @angular/cli
+     ```
+   - This will install Angular CLI globally on your system. The CLI will be available for offline use later.
+
+3. **Download Angular CLI Dependencies**:
+   Angular CLI projects require a set of dependencies to function. You’ll need to cache these for offline installation.
+   - Create a new directory to store these dependencies, e.g., `C:\AngularOfflinePackages`.
+   - Run the following commands to download Angular CLI's dependencies:
+     ```bash
+     ng new dummy-app --skip-install
+     cd dummy-app
+     ```
+   - Next, generate a list of dependencies to be downloaded by running:
+     ```bash
+     npm install --package-lock-only
+     ```
+   - Copy the generated `package-lock.json` file to your offline package directory (`C:\AngularOfflinePackages`).
+
+4. **Download Dependencies to the Package Directory**:
+   - From the terminal, run:
+     ```bash
+     npm install --offline --prefix C:\AngularOfflinePackages
+     ```
+   - This will download all the required npm packages to `C:\AngularOfflinePackages\`.
+   
+### Step 2: Transfer Packages to the Offline Computer
+
+1. **Transfer the `C:\AngularOfflinePackages` Directory**:
+   - Copy the `C:\AngularOfflinePackages` directory and `dummy-app` folder to your offline computer. Use a USB drive, network transfer, or any other method.
+
+2. **Install Node.js on the Offline Computer**:
+   - Install Node.js on your offline computer by using the same installer you downloaded earlier.
+   - This ensures you have Node.js and npm installed on the offline system.
+
+### Step 3: Install Angular CLI and Project Dependencies Offline
+
+1. **Set up a Local npm Registry**:
+   - To install Angular and related dependencies offline, you can use a local npm registry like [Verdaccio](https://verdaccio.org/). This will cache your packages and simulate an npm registry.
+   - Download and install Verdaccio by running:
+     ```bash
+     npm install -g verdaccio
+     ```
+   - Once installed, start the local registry:
+     ```bash
+     verdaccio
+     ```
+   - Verdaccio will run on `http://localhost:4873`. You can keep this terminal open as long as Verdaccio is running.
+
+2. **Configure npm to Use the Local Registry**:
+   - Tell npm to use the local Verdaccio registry. Run:
+     ```bash
+     npm set registry http://localhost:4873
+     ```
+   - This will direct npm to use the local registry for any installations.
+
+3. **Publish Dependencies to the Local Registry**:
+   - Now, publish the cached packages to Verdaccio from your downloaded `C:\AngularOfflinePackages` directory:
+     ```bash
+     npm publish --registry http://localhost:4873 --access public
+     ```
+
+4. **Install Angular CLI Offline**:
+   - Go to the project folder (`dummy-app`).
+   - Run:
+     ```bash
+     npm install
+     ```
+   - This will install Angular CLI and all dependencies using the local registry.
+
+5. **Verify Angular Installation**:
+   - To ensure Angular is set up, try running:
+     ```bash
+     ng serve
+     ```
+   - This command will start a local server, and you can open `http://localhost:4200` in your browser to view the default Angular app.
+
+### Step 4: Create New Angular Projects Offline
+
+- Once Angular CLI is installed, you can now create and work with new Angular projects offline by using:
+  ```bash
+  ng new project-name --skip-install
+  ```
+  Then navigate to your new project folder:
+  ```bash
+  cd project-name
+  ```
+  And install dependencies:
+  ```bash
+  npm install
+  ```
+
+Now you should have a fully offline setup for Angular on Windows 10!
