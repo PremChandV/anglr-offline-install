@@ -110,3 +110,67 @@ npm list @angular/cli --depth=0
 This will display the version and path of the Angular CLI installed in that specific project.
 
 If Angular CLI is not installed locally in the project, this command will show an error indicating that it’s not found.
+
+---------------------------------------------------------------------------------------------------------------------------
+
+When Angular CLI is installed globally, it’s typically stored in a specific directory depending on your operating system. Below is how you can find the global install path and the usual locations for it.
+
+### 1. **Command to Find the Global Install Path**
+
+You can run the following command in your terminal to check the global npm installation path for Angular CLI:
+
+```bash
+npm root -g
+```
+
+This command will return the root directory where all globally installed npm packages are stored, including Angular CLI.
+
+Alternatively, you can run:
+
+```bash
+npm list -g @angular/cli --depth=0
+```
+
+This command lists only the Angular CLI package and displays the directory path.
+
+### 2. **Typical Global Install Paths by Operating System**
+
+On Windows, the global install path is usually:
+
+```
+C:\Users\<Your_Username>\AppData\Roaming\npm\node_modules
+```
+
+So, Angular CLI would typically be installed at:
+
+```
+C:\Users\<Your_Username>\AppData\Roaming\npm\node_modules\@angular\cli
+```
+
+On Linux and macOS, the global install path is generally:
+
+```
+/usr/local/lib/node_modules
+```
+
+So, Angular CLI would be located at:
+
+```
+/usr/local/lib/node_modules/@angular/cli
+```
+
+### 3. **Path for the `ng` Executable**
+
+The actual executable file for Angular CLI (`ng`) is usually available in:
+
+- **Windows**: `C:\Users\<Your_Username>\AppData\Roaming\npm`
+- **Linux/macOS**: `/usr/local/bin`
+
+You can confirm this by running:
+
+```bash
+where ng  # Windows
+which ng  # macOS/Linux
+```
+
+These commands will show the exact location of the `ng` executable in the global path.
